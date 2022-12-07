@@ -1,36 +1,30 @@
 package working_on_jenkins;
 
-import java.io.File;
-import java.io.IOException;
 import java.time.Duration;
-import java.util.Random;
 
 import org.openqa.selenium.By;
-
-import org.openqa.selenium.OutputType;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
-import org.openqa.selenium.io.FileHandler;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 
-
-
-public class Login {
+public class LoginTwo {
 	
-	public static WebDriver driver;
+public static WebDriver driver;
 
 	
 	@BeforeMethod
-	@Parameters({"browser","url" })
-	public void setUp(String browser, String url) {
-		if (browser.equals("chrome")) {
+	@Parameters({"browser2","url" })
+	public void setUp(String browser2, String url) {
+		if (browser2.equals("chrome")) {
 			ChromeOptions options = new ChromeOptions();
 			options.addArguments("--Incognito"); 
 			driver = new ChromeDriver(options);
@@ -38,7 +32,7 @@ public class Login {
 			driver.get(url);
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
 			
-		}else if(browser.equals("firefox")) {
+		}else if(browser2.equals("firefox")) {
 			FirefoxOptions options = new FirefoxOptions();
 			options.addArguments("-private");
 			driver = new FirefoxDriver(options);
@@ -55,12 +49,11 @@ public class Login {
 		}
 			
 	}
-	
 	@Test
 	public void searNecklaces() {
 		
 		driver.findElement(By.xpath("//div[@id='menu_106093']/descendant::a[1]")).click();
-		takeAscreenShot(driver.findElement(By.xpath("//div[@class='_1ttGg']/picture")));
+		Login.takeAscreenShot(driver.findElement(By.xpath("//div[@class='_1ttGg']/picture")));
 		String expected = "Custom Necklaces for Women - MYKA";
 		String actual = driver.getTitle();
 		
@@ -72,19 +65,5 @@ public class Login {
 	public void tearDown() {
 		driver.quit();
 	}
-	
-	public static void takeAscreenShot(WebElement screenshot) {
-		double name = Math.random();
-//		WebElement screenshot = driver.findElement(By.xpath("//div[@class='section where-to']"));
-		File source = screenshot.getScreenshotAs(OutputType.FILE);
-		File distiantion = new File(System.getProperty("user.dir")+"\\test-output\\screenshot\\screen"+name+".png");
-		try {
-			FileHandler.copy(source, distiantion);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	
 
 }
