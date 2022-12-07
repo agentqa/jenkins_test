@@ -77,7 +77,7 @@ public class Login {
 		double name = Math.random();
 //		WebElement screenshot = driver.findElement(By.xpath("//div[@class='section where-to']"));
 		File source = screenshot.getScreenshotAs(OutputType.FILE);
-		File distiantion = new File(System.getProperty("user.dir")+"\\test-output\\screenshot\\screen"+name+".png");
+		File distiantion = new File(System.getProperty("user.dir")+"\\screenshots\\screen"+name+".png");
 		try {
 			FileHandler.copy(source, distiantion);
 		} catch (IOException e) {
