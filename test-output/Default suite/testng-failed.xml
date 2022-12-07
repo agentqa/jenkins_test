@@ -3,12 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="working_on_jenkins.Login">
+      <class name="cnn.News_US">
         <methods>
+          <include name="searchForWorld"/>
           <include name="setUp"/>
-          <include name="searchUSNews"/>
+          <include name="tearDown"/>
         </methods>
-      </class> <!-- working_on_jenkins.Login -->
+      </class> <!-- cnn.News_US -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
